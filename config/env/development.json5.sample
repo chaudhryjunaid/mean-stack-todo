@@ -1,7 +1,7 @@
 {
     // This is your MYSQL Database configuration
     db: {
-        name: "mean_relational",
+        name: "mean_relational_todo",
         password: "",
         username: "root",
         host: "localhost",

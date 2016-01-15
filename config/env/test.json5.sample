@@ -2,7 +2,7 @@
     PORT: 3001,
     // This is your MYSQL test database configuration
     db: {
-        name: "mean_relational_test",
+        name: "mean_relational_todo_test",
         password: "",
         username: "root",
         host: "localhost",
