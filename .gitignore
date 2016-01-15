@@ -39,3 +39,6 @@ migrations/
 *~
 *.swp
 *.swo
+
+#Vagrant
+.vagrant/
