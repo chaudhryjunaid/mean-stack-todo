@@ -3,6 +3,7 @@
 /**
  * Module dependencies.
  */
+var _ = require('lodash');
 var express = require('express');
 var flash = require('connect-flash');
 var helpers = require('view-helpers');
@@ -77,21 +78,31 @@ module.exports = function(app, passport) {
     });
 
     app.use('*',function(req, res){
-        res.status(404).render('404', {
-            url: req.originalUrl,
-            error: 'Not found'
+        res.sendFile(config.root+'/public/index.html');
+    });
+
+    app.use(function(err, req, res, next) {
+        if(!_.has(err,'message')){
+            return next(err);
+        }
+        //Log it
+        winston.error(err);
+
+        //Error response
+        res.status(err.httpStatus||500).send({
+            message: err.message,
+            err: err
         });
     });
 
     app.use(function(err, req, res, next) {
-
         //Log it
         winston.error(err);
 
-        //Error page
-        res.status(500).render('500', {
-            error: err.stack
+        // Unrecognized error response
+        res.status(500).send({
+            message: '500 Internal Server Error!',
+            err: err
         });
     });
-
 };

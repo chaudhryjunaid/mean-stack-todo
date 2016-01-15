@@ -4,10 +4,8 @@
  * Module dependencies.
  */
 var _ = require('lodash');
-
+var config = require('../../config/config');
 
 exports.render = function(req, res) {
-    res.render('index', {
-        user: req.user ? JSON.stringify(req.user) : "null"
-    });
+    res.sendFile(config.root+'/public/index.html');
 };

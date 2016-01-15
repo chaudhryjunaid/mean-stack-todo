@@ -1,8 +1,8 @@
 'use strict';
 
 /**
-	* User Model
-	*/
+* User Model
+*/
 
 var crypto = require('crypto');
 
@@ -11,17 +11,10 @@ module.exports = function(sequelize, DataTypes) {
 	var User = sequelize.define('User', 
 		{
 			name: DataTypes.STRING,
-			email: DataTypes.STRING,
-			username: DataTypes.STRING,
+			email: { type:DataTypes.STRING, allowNull:false, unique:true, validate:{isEmail:true}},
+			username: { type:DataTypes.STRING, allowNull:false, unique:true, validate:{isAlphanumeric:true}},
 			hashedPassword: DataTypes.STRING,
-			provider: DataTypes.STRING,
-			salt: DataTypes.STRING, 
-			facebookUserId: DataTypes.INTEGER,
-			twitterUserId: DataTypes.INTEGER,
-			twitterKey: DataTypes.STRING,
-			twitterSecret: DataTypes.STRING,
-			github: DataTypes.STRING,
-			openId: DataTypes.STRING
+			salt: DataTypes.STRING
 		},
 		{
 			instanceMethods: {
@@ -32,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
 					return values;
 				},
 				makeSalt: function() {
-					return crypto.randomBytes(16).toString('base64'); 
+					return crypto.randomBytes(16).toString('base64');
 				},
 				authenticate: function(plainText){
 					return this.encryptPassword(plainText, this.salt) === this.hashedPassword;
@@ -46,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
 				}
 			},
 			associate: function(models) {
-				User.hasMany(models.Article);
+				User.hasMany(models.Todo);
 			}
 		}
 	);
