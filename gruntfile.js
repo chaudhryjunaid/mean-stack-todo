@@ -48,9 +48,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-nodemon');
     //grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-mocha-test');
-    //grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-env');
-    //grunt.loadNpmTasks('grunt-copy');
 
     //Making grunt default to force in order not to break the project.
     grunt.option('force', true);
