@@ -1,1 +1,1 @@
-angular.module('todo',['ngResource','ngCookies','ngRoute']);
+var todoApp = angular.module('todoApp',['ngResource','ngCookies','ngRoute']);
