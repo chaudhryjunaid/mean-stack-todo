@@ -37,6 +37,7 @@ module.exports = function(app, passport) {
 
     //Setting the fav icon and static folder
     app.use(favicon(config.root + '/public/img/icons/favicon.ico'));
+    app.use(express.static(config.root + '/bower_components'));
     app.use(express.static(config.root + '/public'));
 
     //Don't use logger for test env
