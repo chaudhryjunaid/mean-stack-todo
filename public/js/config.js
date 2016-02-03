@@ -1,8 +1,12 @@
 todoApp.config(['$routeProvider',function($routeProvider){
-    $routeProvider.when('/',{
-        templateUrl:'partials/login.html',
-        controller:'LoginCtrl'
-    }).otherwise({
-        redirectTo:'/'
-    });
+    $routeProvider
+        .when('/',{
+            templateUrl:'partials/login.html',
+            controller:'LoginCtrl'
+        }).when('/todo',{
+            templateUrl:'partials/todo.html',
+            controller:'TodoCtrl'
+        }).otherwise({
+            redirectTo:'/'
+        });
 }]);

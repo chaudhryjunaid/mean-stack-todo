@@ -1,0 +1,10 @@
+<ng-controller="TodoCtrl">
+
+    <h1>Todo List</h1>
+
+    <input type="text" ng-model="item"><button ng-click="addTodoItem()">add</button>
+
+    <ul ng-repeat="todo in todolist">
+        <li>{{todo.item}}</li>
+    </ul>
+</div>
