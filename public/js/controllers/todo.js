@@ -1,17 +1,22 @@
 todoApp.controller('TodoCtrl', ['$scope', 'Global', 'User', '$location','Todo',function ($scope, Global, User, $location, Todo) {
     $scope.global = Global;
 
-    $scope.todolist = Todo.todoResource.$query;
+    Todo.todoResource().query(function(data){
+        $scope.todolist = data;
+    });
 
     $scope.addTodoItem = function(){
         console.log('Add todo called.');
-        var newTodo = new Todo.todoResource();
-        newTodo.item = $scope.item;
-        newTodo.$save().then(function(response){
+        if(!$scope.item){
+            return;
+        }
+        Todo.todoResource().save({item:$scope.item},function(response){
             console.log(JSON.stringify(response));
-            $scope.todolist = Todo.todoResource.$query();
-        }).catch(function(err){
-            console.log(err.message);
+            $scope.item = "";
+            $scope.todolist = Todo.todoResource().query();
+        },function(error){
+            console.log(JSON.stringify(error));
+            alert('The todo item could not be saved!');
         });
     };
 }]);
